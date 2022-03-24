@@ -12,6 +12,9 @@ module.exports = async srv => {
   messaging.on("refappscf/ecc/123/BO/BusinessPartner/Created", async msg => {
     console.log("<< event caught", msg.event);
     console.log("<< event caught", msg.data);
+    console.log("<< event caught", msg);
+    console.log("<< event caught", msg.data.BUT000[0].PARTNER);
+    
     let BUSINESSPARTNER = "";
     BUSINESSPARTNER = parseInt(msg.data.BUT000[0].PARTNER);
     console.log("<<< Received Created Business Partner Id " + BUSINESSPARTNER);

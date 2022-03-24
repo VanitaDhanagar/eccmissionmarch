@@ -9,11 +9,11 @@ module.exports = async srv => {
   srv.on("READ", BusinessPartnerAddress, req => bupaSrv.tx(req).run(req.query))
   srv.on("READ", BusinessPartner, req => bupaSrv.tx(req).run(req.query))
 
-//   messaging.on("refappscf/ecc/123/BO/BusinessPartner/Created", async msg => {
-//     console.log("<< event caught", msg.event);
-//     console.log("<< event caught", msg.data);
-//     console.log("<< event caught", msg);
-//     console.log("<< event caught", msg.data.BUT000[0].PARTNER);
+  messaging.on("refappscf/ecc/123/BO/BusinessPartner/Created", async msg => {
+    console.log("<< event caught", msg.event);
+    console.log("<< event caught", msg.data);
+    console.log("<< event caught", msg);
+    console.log("<< event caught", msg.data.BUT000[0].PARTNER);
     
 //     let BUSINESSPARTNER = "";
 //     BUSINESSPARTNER = parseInt(msg.data.BUT000[0].PARTNER);
@@ -40,7 +40,7 @@ module.exports = async srv => {
 //        const res = await cds.run(INSERT.into(Addresses).entries(address));
 //        console.log("Address inserted");
 //        }  
-//   });
+  });
 
   messaging.on("refappscf/ecc/123/BO/BusinessPartner/Changed", async msg => {
 

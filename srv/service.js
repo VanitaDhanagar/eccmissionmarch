@@ -13,34 +13,35 @@ module.exports = async srv => {
     console.log("<< event caught", msg.event);
     console.log("<< event caught", msg.data);
     console.log("<< event caught", msg);
-    console.log("<< event caught", msg.data.BUT000);
     
     
-//     let BUSINESSPARTNER = "";
-//     BUSINESSPARTNER = parseInt(msg.data.BUT000[0].PARTNER);
-//     console.log("<<< Received Created Business Partner Id " + BUSINESSPARTNER);
-//     let BusinessPartnerName = "";
-//     if(msg.data.BUT000[0].NAME1_TEXT == ""){
-//       BusinessPartnerName = msg.data.BUT000[0].NAME_FIRST + ' ' + msg.data.BUT000[0].NAME_LAST;
-//     }
-//     else{
-//       BusinessPartnerName = msg.data.BUT000[0].NAME1_TEXT;  
-//     }
-//     const result = await cds.run(INSERT.into(Notifications).entries({businessPartnerId:BUSINESSPARTNER, verificationStatus_code:'N', businessPartnerName:BusinessPartnerName}));        
-//     let address = {
-//             addressId: parseInt(msg.data.BUT000[0].ADRC[0].BUT020[0].ADDRNUMBER),
-//             country: msg.data.BUT000[0].ADRC[0].COUNTRY,
-//             cityName: msg.data.BUT000[0].ADRC[0].CITY1,
-//             streetName: msg.data.BUT000[0].ADRC[0].STREET,
-//             postalCode: msg.data.BUT000[0].ADRC[0].POST_CODE1,
-//             businessPartnerId: BUSINESSPARTNER
-//        }
-//       if(address) {  
-//        const notificationObj = await cds.run(SELECT.one(Notifications).columns("ID").where({businessPartnerId: BUSINESSPARTNER}));
-//        address.notifications_ID=notificationObj.ID
-//        const res = await cds.run(INSERT.into(Addresses).entries(address));
-//        console.log("Address inserted");
-//        }  
+    
+    let BUSINESSPARTNER = "";
+    //BUSINESSPARTNER = parseInt(msg.data.BUT000[0].PARTNER);
+    BUSINESSPARTNER=0000000142
+    console.log("<<< Received Created Business Partner Id " + BUSINESSPARTNER);
+    let BusinessPartnerName = "";
+    if(msg.data.BUT000[0].NAME1_TEXT == ""){
+      BusinessPartnerName = msg.data.BUT000[0].NAME_FIRST + ' ' + msg.data.BUT000[0].NAME_LAST;
+    }
+    else{
+      BusinessPartnerName = msg.data.BUT000[0].NAME1_TEXT;  
+    }
+    const result = await cds.run(INSERT.into(Notifications).entries({businessPartnerId:BUSINESSPARTNER, verificationStatus_code:'N', businessPartnerName:BusinessPartnerName}));        
+    let address = {
+            addressId: parseInt(msg.data.BUT000[0].ADRC[0].BUT020[0].ADDRNUMBER),
+            country: msg.data.BUT000[0].ADRC[0].COUNTRY,
+            cityName: msg.data.BUT000[0].ADRC[0].CITY1,
+            streetName: msg.data.BUT000[0].ADRC[0].STREET,
+            postalCode: msg.data.BUT000[0].ADRC[0].POST_CODE1,
+            businessPartnerId: BUSINESSPARTNER
+       }
+      if(address) {  
+       const notificationObj = await cds.run(SELECT.one(Notifications).columns("ID").where({businessPartnerId: BUSINESSPARTNER}));
+       address.notifications_ID=notificationObj.ID
+       const res = await cds.run(INSERT.into(Addresses).entries(address));
+       console.log("Address inserted");
+       }  
   });
 
   messaging.on("refappscf/ecc/123/BO/BusinessPartner/Changed", async msg => {
